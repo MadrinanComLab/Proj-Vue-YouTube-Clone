@@ -13,8 +13,8 @@
 </template>
 
 <script>
-// TODO FINISH THE GUIDE FOR SETTING UP THE YOUTUBE API IN THE README.md THEN PROCEED TO FETCHING YOUTUBE VIDEOS FROM THE API
 import Header from "@/components/Header.vue";
+import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default {
     name: "Home",
@@ -37,6 +37,18 @@ export default {
                 "Country Music"
             ]
         }
+    },
+    mounted(){
+        const API_KEY = process.env.VUE_APP_API_KEY;
+        let max_results_length = 16
+        let url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;
+        YouTubeAPI.get(url)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 };
 </script>

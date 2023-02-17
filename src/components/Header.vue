@@ -28,10 +28,10 @@ export default {
     name: "Header",
     props: [ "tags" ],
     mounted(){
-        console.log(process.env.VUE_APP_TEST);
+        // console.log(process.env.VUE_APP_API_KEY);
     },
     created(){
-        console.log("Tangina")
+        // console.log("Tangina")
     }
 }
 </script>
