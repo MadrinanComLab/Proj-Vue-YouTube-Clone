@@ -9,9 +9,6 @@
 <script>
 export default {
     name: "YouTubeVideo",
-    props: [ "thumbnail", "title", "channel_title" ],
-    mounted(){
-        console.log(this.title);
-    }
+    props: [ "thumbnail", "title", "channel_title" ]
 }
 </script>

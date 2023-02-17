@@ -18,7 +18,7 @@
         </div>
 
         <div class="px-[10%]">
-            <span v-for="(tag, i) in tags" :key="tag" :class="`${(i === 0) ? 'bg-[#f1f1f1] text-[#0f0f0f]' : 'bg-[#272727] text-[#e7e7e7] font-semibold'} px-3 py-2 ml-2 rounded-lg`">{{ tag }}</span>
+            <span v-for="(tag, i) in tags" :key="tag" @click="fetchYouTubeVideos(tag)" :class="`${(i === 0) ? 'bg-[#f1f1f1] text-[#0f0f0f]' : 'bg-[#272727] text-[#e7e7e7] font-semibold'} cursor-pointer px-3 py-2 ml-2 rounded-lg`">{{ tag }}</span>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@
 <script>
 export default {
     name: "Header",
-    props: [ "tags" ],
+    props: [ "tags", "fetchYouTubeVideos" ],
     mounted(){
         // console.log(process.env.VUE_APP_API_KEY);
     },

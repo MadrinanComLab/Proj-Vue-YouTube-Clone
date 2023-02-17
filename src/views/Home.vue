@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header :tags="tags"/>
+        <Header :tags="tags" :fetchYouTubeVideos="fetchYouTubeVideos"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
             <div v-for="i in 15" :key="i">
@@ -12,7 +12,8 @@
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length > 0 && error_message === ''">
             <!-- <h1 class="text-white">Hello!</h1> -->
             <div v-for="(video, i) in videos" :key="i">
-                <YouTubeVideo :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
+                <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
+                <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
             </div>
         </div>
     </div>
@@ -21,16 +22,18 @@
 <script>
 import Header from "@/components/Header.vue";
 import YouTubeVideo from "@/components/Cards/YouTubeVideo.vue";
+import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
 import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default {
     name: "Home",
-    components: { Header, YouTubeVideo },
+    components: { Header, YouTubeVideo, YouTubeChannel },
     metaInfo: {
         title: "YouTube"
     },
     methods:{
         fetchYouTubeVideos(query){
+            console.log("CALLED");
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
             let url = (query) ? `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`
