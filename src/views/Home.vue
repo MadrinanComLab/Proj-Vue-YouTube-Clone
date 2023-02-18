@@ -3,11 +3,7 @@
         <Header :tags="tags" :fetchYouTubeVideos="fetchYouTubeVideos"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
-            <div v-for="i in 15" :key="i">
-                <div class="bg-[#252525] w-full h-[180px] rounded-lg mb-3"></div>
-                <p class="bg-[#252525] w-11/12 h-[30px] rounded mb-3"></p>
-                <p class="bg-[#252525] w-3/4 h-[30px] rounded"></p>
-            </div>
+            <Skeleton :counter="12"/>
         </div>
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length > 0 && error_message === ''">
             <!-- <h1 class="text-white">Hello!</h1> -->
@@ -15,6 +11,8 @@
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
             </div>
+
+            <Skeleton :counter="4"/>
         </div>
     </div>
 </template>
@@ -23,11 +21,12 @@
 import Header from "@/components/Header.vue";
 import YouTubeVideo from "@/components/Cards/YouTubeVideo.vue";
 import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
+import Skeleton from "@/components/Cards/Skeleton.vue";
 import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default {
     name: "Home",
-    components: { Header, YouTubeVideo, YouTubeChannel },
+    components: { Header, YouTubeVideo, YouTubeChannel, Skeleton },
     metaInfo: {
         title: "YouTube"
     },
@@ -36,8 +35,10 @@ export default {
             console.log("CALLED");
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
-            let url = (query) ? `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`
-                : `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`;
+            let url = (query) ? `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`
+                : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;
+
+            console.log(url);
 
             YouTubeAPI.get(url)
                 .then(response => {
