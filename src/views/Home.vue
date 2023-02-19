@@ -27,7 +27,8 @@ export default {
     name: "Home",
     components: { Header, YouTubeVideo, YouTubeChannel, Skeleton },
     metaInfo: {
-        title: "YouTube"
+        title: "YouTube",
+        next_page_token: ""
     },
     methods:{
         fetchYouTubeVideos(query){
@@ -35,19 +36,27 @@ export default {
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
             let url = (query) ? `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`
-                : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;
+                : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;;
 
-            console.log(url);
+            /** IF next_page_token IS NOT NULL THEN INCLUDE THE NEXT PAGE TOKEN IN API CALL.
+             * REFRENCES FOR IMPLEMENTING PAGINATION IN YOUTUBE API:
+             * https://developers.google.com/youtube/v3/docs/videos/list#response
+             * https://stackoverflow.com/questions/70664858/how-does-pagination-work-in-youtube-api-apiclient-discovery
+             */
+            url += (this.next_page_token) ? `&pageToken=${ this.next_page_token }` : "";
 
             YouTubeAPI.get(url)
                 .then(response => {
-                    console.log(response.data.items); // TODO TEMP...
+                    console.log(response); // TODO TEMP...
 
                     /** CACHE THE DATA OF YOUTUBE VIDEOS IN THE LOCAL STORAGE */
                     localStorage.setItem("yt_videos", JSON.stringify(response.data.items));
 
                     /** THIS IS THE FIRST FETCH, SO SET THE VALUE ON videos */
                     this.videos.push(...response.data.items);
+
+                    /** SAVE THE nextPageToken ATTRIBUTE FOR PAGINATION */
+                    this.next_page_token = response.data.nextPageToken;
                 })
                 .catch(err => {
                     /** DISPLAY THE ERROR MESSAGE AT THE CONSOLE */
@@ -68,7 +77,7 @@ export default {
              * https://stackoverflow.com/questions/59603315/how-to-detect-when-a-user-scrolls-to-the-bottom-of-a-div-vue
              */
             if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
-                console.log("Omai");
+                this.fetchYouTubeVideos();
             }
         }
     },
