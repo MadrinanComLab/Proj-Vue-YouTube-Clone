@@ -1,12 +1,11 @@
 <template>
-    <div>
+    <div id="home_container">
         <Header :tags="tags" :fetchYouTubeVideos="fetchYouTubeVideos"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
             <Skeleton :counter="12"/>
         </div>
-        <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length > 0 && error_message === ''">
-            <!-- <h1 class="text-white">Hello!</h1> -->
+        <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
             <div v-for="(video, i) in videos" :key="i">
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
@@ -48,7 +47,7 @@ export default {
                     localStorage.setItem("yt_videos", JSON.stringify(response.data.items));
 
                     /** THIS IS THE FIRST FETCH, SO SET THE VALUE ON videos */
-                    this.videos = response.data.items;
+                    this.videos.push(...response.data.items);
                 })
                 .catch(err => {
                     /** DISPLAY THE ERROR MESSAGE AT THE CONSOLE */
@@ -57,6 +56,20 @@ export default {
                     /** DISPLAY THE ERROR MESSAGE ON USER */
                     this.error_message = err;
                 });
+        },
+
+        detectBottomPage(e){
+            /** IF YOU REMOVE THE 'documentElement' AND YOU TRIED TO ACCESS e.target.offsetHeight, IT WILL BE UNDEFINED. ADDING THE documentElement RESOLVE THE PROBLEM:
+             * https://stackoverflow.com/questions/51908241/when-trying-access-event-target-something-always-return-undefined
+             */
+            let element = e.target.documentElement;
+            
+            /** SOURCE FOR VUE DETECTING IF BOTTOM PAGE IS REACHED:
+             * https://stackoverflow.com/questions/59603315/how-to-detect-when-a-user-scrolls-to-the-bottom-of-a-div-vue
+             */
+            if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
+                console.log("Omai");
+            }
         }
     },
     data(){
@@ -78,6 +91,9 @@ export default {
         }
     },
     mounted(){
+        /** THIS WILL BE USED FOR DETECTING IF THE BOTTOM OF THE PAGE WAS REACHED */
+        window.addEventListener("scroll", this.detectBottomPage);
+
         if(localStorage.getItem("yt_videos")){
             /** IF THE 'yt_videos' IN LOCAL STORAGE IS NOT EMPTY THEN USE THAT VALUE. WE'RE CACHING THE VALUE SINCE THE API CALL IS NOT UNLIMITED. */
             this.videos = JSON.parse(localStorage.getItem("yt_videos"));

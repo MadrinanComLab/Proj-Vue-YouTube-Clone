@@ -9,10 +9,7 @@
 <script>
 export default {
     name: "Skeleton",
-    props: [ "counter" ],
-    mounted(){
-        console.log(typeof this.counter);
-    }
+    props: [ "counter" ]
 }
 </script>
 
