@@ -26,15 +26,25 @@ import YouTubeAPI from "@/api/YouTubeAPI";
 export default {
     name: "Home",
     components: { Header, YouTubeVideo, YouTubeChannel, Skeleton },
-    metaInfo: {
-        title: "YouTube",
-        next_page_token: ""
-    },
     methods:{
-        fetchYouTubeVideos(query){
+        /**
+         * DOCU: Function to fetch YouTube videos
+         * Triggered: When user reached the bottom page, click tags at the header, or when the Home component was mounted.
+         * Last Update: February 19, 2023
+         * @function
+         * @memberOf Home page
+         * @param {string} query = "" - Optional value, this will be used when user search for specific video or if the user select a tag in the header.
+         * @param {boolean} reset = false - This will define if the array would be reset. If the value is false then the new fetch value will be appended to the existing array
+         * @author MadriñanComputerLab
+         */
+        fetchYouTubeVideos(query = "", reset = false){
             console.log("CALLED");
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
+            
+            /** SET THE this.query TO GIVEN query WHEN THIS FUNCTION WAS CALLED. THE PURPOSE IS WHEN USER CLICKED A TAG IN THE HEADER, THE PAGINATION WILL WORK PROPERLY */
+            this.query = query;
+
             let url = (query) ? `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`
                 : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;;
 
@@ -45,6 +55,8 @@ export default {
              */
             url += (this.next_page_token) ? `&pageToken=${ this.next_page_token }` : "";
 
+            console.log(url);
+
             YouTubeAPI.get(url)
                 .then(response => {
                     console.log(response); // TODO TEMP...
@@ -52,8 +64,14 @@ export default {
                     /** CACHE THE DATA OF YOUTUBE VIDEOS IN THE LOCAL STORAGE */
                     localStorage.setItem("yt_videos", JSON.stringify(response.data.items));
 
-                    /** THIS IS THE FIRST FETCH, SO SET THE VALUE ON videos */
-                    this.videos.push(...response.data.items);
+                    if(reset){
+                        /** IF THE reset IS TRUE THEN SET THE NEW FETCH DATA AS NEW ARRAY */
+                        this.videos = response.data.items;
+                    }
+                    else{
+                        /** IF THE reset IS FALSE THEN APPEND THE NEW FETCH DATA */
+                        this.videos.push(...response.data.items);
+                    }
 
                     /** SAVE THE nextPageToken ATTRIBUTE FOR PAGINATION */
                     this.next_page_token = response.data.nextPageToken;
@@ -67,6 +85,15 @@ export default {
                 });
         },
 
+        /**
+         * DOCU: Function to detect the bottom page
+         * Triggered: When user reached the bottom page.
+         * Last Update: February 19, 2023
+         * @function
+         * @memberOf Home page
+         * @param {event} e = "" - Require input event.
+         * @author MadriñanComputerLab
+         */
         detectBottomPage(e){
             /** IF YOU REMOVE THE 'documentElement' AND YOU TRIED TO ACCESS e.target.offsetHeight, IT WILL BE UNDEFINED. ADDING THE documentElement RESOLVE THE PROBLEM:
              * https://stackoverflow.com/questions/51908241/when-trying-access-event-target-something-always-return-undefined
@@ -77,7 +104,8 @@ export default {
              * https://stackoverflow.com/questions/59603315/how-to-detect-when-a-user-scrolls-to-the-bottom-of-a-div-vue
              */
             if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
-                this.fetchYouTubeVideos();
+                /** this.query WILL BE GIVEN VALUE WHEN USER CLICKS TAG IN THE HEADER */
+                this.fetchYouTubeVideos(this.query);
             }
         }
     },
@@ -85,6 +113,8 @@ export default {
         return {
             error_message: "",
             videos: [],
+            query: "",
+            next_page_token: "",
             tags: [
                 "All",
                 "Music",
