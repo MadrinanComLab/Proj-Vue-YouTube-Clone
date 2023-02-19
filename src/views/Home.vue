@@ -41,7 +41,7 @@ export default {
             /** IF next_page_token IS NOT NULL THEN INCLUDE THE NEXT PAGE TOKEN IN API CALL.
              * REFRENCES FOR IMPLEMENTING PAGINATION IN YOUTUBE API:
              * https://developers.google.com/youtube/v3/docs/videos/list#response
-             * https://stackoverflow.com/questions/70664858/how-does-pagination-work-in-youtube-api-apiclient-discovery
+             * https://developers.google.com/youtube/v3/guides/implementation/pagination
              */
             url += (this.next_page_token) ? `&pageToken=${ this.next_page_token }` : "";
 

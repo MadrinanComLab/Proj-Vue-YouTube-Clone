@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-6">
+    <div class="mb-6 sticky top-0 bg-[#0f0f0f] pb-5">
         <div class="px-[10%] py-4 grid grid-cols-3 gap-1 mb-3">
             <div>
                 <img src="@/assets/images/yt-logo-with-text.png" alt="YouTube-Logo" class="w-[150px]">
