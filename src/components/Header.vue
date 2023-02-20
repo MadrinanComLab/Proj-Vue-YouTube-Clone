@@ -18,7 +18,7 @@
         </div>
 
         <div class="px-[10%]">
-            <span v-for="(tag, i) in tags" :key="tag" @click="fetchYouTubeVideos(tag, true)" :class="`${(i === 0) ? 'tags--selected' : 'tags--unselected'} tags hover:tags--hover`">{{ tag }}</span>
+            <span v-for="(tag, i) in tags" :key="tag" @click="fetchVideoByTags" :class="`${(i === 0) ? 'tags--selected' : 'tags--unselected'} tags hover:tags--hover`">{{ tag }}</span>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@
 <script>
 export default {
     name: "Header",
-    props: [ "tags", "fetchYouTubeVideos" ],
+    props: [ "tags", "fetchVideoByTags" ],
     mounted(){
         // console.log(process.env.VUE_APP_API_KEY);
     },

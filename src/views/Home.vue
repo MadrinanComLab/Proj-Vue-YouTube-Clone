@@ -1,6 +1,6 @@
 <template>
     <div id="home_container">
-        <Header :tags="tags" :fetchYouTubeVideos="fetchYouTubeVideos"/>
+        <Header :tags="tags" :fetchVideoByTags="fetchVideoByTags"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
             <Skeleton :counter="12"/>
@@ -41,9 +41,6 @@ export default {
             console.log("CALLED");
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
-            
-            /** SET THE this.query TO GIVEN query WHEN THIS FUNCTION WAS CALLED. THE PURPOSE IS WHEN USER CLICKED A TAG IN THE HEADER, THE PAGINATION WILL WORK PROPERLY */
-            this.query = query;
 
             let url = (query) ? `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`
                 : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;;
@@ -83,6 +80,26 @@ export default {
                     /** DISPLAY THE ERROR MESSAGE ON USER */
                     this.error_message = err;
                 });
+        },
+
+        fetchVideoByTags(e){
+            // TODO COSMETIC BUG HERE...
+            let tags = document.getElementsByClassName("tags");
+            console.log(e);
+
+            /** THIS WILL BE USED LATER FOR PAGINATION */
+            this.query = e.target.innerText;
+
+            /** REMOVE tags--selected CLASS NAME ATTRIBUTE ON FORMER 'selected' TAGS */
+            for(let tag of tags){
+                tag.classList.remove("tags--selected");
+            }
+            
+            /** ADD THE selected CLASS NAME ATTRIBUTE */
+            e.target.classList.add("tags--selected");
+
+            /** FETCH THE VIDEO */
+            this.fetchYouTubeVideos(e.target.innerText, true);
         },
 
         /**
