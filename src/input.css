@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/** 
+ * THE @layer components WILL PLACE THE STYLESHEET AT '@tailwind components' 
+ * SOURCE FOR THIS: https://www.youtube.com/watch?v=Nez7G5sQz0k&t=26s
+ */
+@layer components {
+    .tags{
+        @apply cursor-pointer px-3 py-2 ml-2 rounded-lg ;
+    }
+
+    .tags--selected{
+        background: #f1f1f1;
+        color: #0f0f0f;
+    }
+
+    .tags--unselected{
+        background: #272727;
+        color: #e7e7e7;
+        font-weight: 600;
+
+    }
+    
+    .tags--hover{
+        background: #3f3f3f;
+    }
+}
