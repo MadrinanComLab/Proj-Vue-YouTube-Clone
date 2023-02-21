@@ -18,7 +18,8 @@
         </div>
 
         <div class="px-[10%]">
-            <span v-for="(tag, i) in tags" :key="tag" @click="fetchVideoByTags" :class="`${(i === 0) ? 'tags--selected' : 'tags--unselected'} tags hover:tags--hover`">{{ tag }}</span>
+            <!--//TODO PLEASE CREATE A TAGS COMPONENT LATER AND MOVE ALL TAG RELATED EVENT OR FUNCTION THERE... -->
+            <span v-for="tag in tags" :key="tag" @click="fetchVideoByTags" :class="`${(selected_tag === tag) ? 'tags--selected' : 'tags--unselected hover:tags--hover'} tags`">{{ tag }}</span>
         </div>
     </div>
 </template>
@@ -26,7 +27,7 @@
 <script>
 export default {
     name: "Header",
-    props: [ "tags", "fetchVideoByTags" ],
+    props: [ "tags", "selected_tag", "fetchVideoByTags" ],
     mounted(){
         // console.log(process.env.VUE_APP_API_KEY);
     },

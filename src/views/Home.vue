@@ -1,6 +1,6 @@
 <template>
     <div id="home_container">
-        <Header :tags="tags" :fetchVideoByTags="fetchVideoByTags"/>
+        <Header :tags="tags" :selected_tag="selected_tag" :fetchVideoByTags="fetchVideoByTags"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
             <Skeleton :counter="12"/>
@@ -83,20 +83,11 @@ export default {
         },
 
         fetchVideoByTags(e){
-            // TODO COSMETIC BUG HERE...
-            let tags = document.getElementsByClassName("tags");
-            console.log(e);
-
             /** THIS WILL BE USED LATER FOR PAGINATION */
             this.query = e.target.innerText;
 
-            /** REMOVE tags--selected CLASS NAME ATTRIBUTE ON FORMER 'selected' TAGS */
-            for(let tag of tags){
-                tag.classList.remove("tags--selected");
-            }
-            
-            /** ADD THE selected CLASS NAME ATTRIBUTE */
-            e.target.classList.add("tags--selected");
+            /** THIS WILL BE USED LATER FOR MODIFYING THE STYLE OF TAGS */
+            this.selected_tag = e.target.innerText;
 
             /** FETCH THE VIDEO */
             this.fetchYouTubeVideos(e.target.innerText, true);
@@ -132,6 +123,7 @@ export default {
             videos: [],
             query: "",
             next_page_token: "",
+            selected_tag: "All",
             tags: [
                 "All",
                 "Music",
