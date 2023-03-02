@@ -8,19 +8,19 @@ This project was created on January 21, 2023
 </p>
 
 Before you run this app, install the dependencies first, by running this command:
-NPM Command
--------------------------------------------------|
-npm install|
+```
+npm install
+```
 
 Command to run this app:
-NPM Command
--------------------------------------------------|
-npm run serve|
+```
+npm run serve
+```
 
 To watch changes in tailwind in case you are modifying it:
-NPM Command
--------------------------------------------------|
-npx tailwindcss-cli build -i ./src/input.css -o ./dist/output.css --watch|
+```
+npx tailwindcss-cli build -i ./src/input.css -o ./dist/output.css --watch
+```
 
 ***Note:*** If you tried to modify the Tailwind and it didn't work, please try to restart the Vue server.
 
