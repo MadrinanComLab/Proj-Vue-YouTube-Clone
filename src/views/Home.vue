@@ -1,18 +1,19 @@
 <template>
     <div id="home_container">
-        <Header :tags="tags" :selected_tag="selected_tag" :fetchVideoByTags="fetchVideoByTags"/>
+        <!-- REMOVED ATTR IN Header:  :tags="tags" :selected_tag="selected_tag" :fetchVideoByTags="fetchVideoByTags" -->
+        <Header :display_tags="true"/>
 
-        <div class="px-[10%] grid grid-cols-4 gap-4" v-if="videos.length === 0 && error_message === ''">
+        <div class="px-[10%] grid grid-cols-4 gap-4" v-if="$store.state.videos.length === 0 && $store.state.error_message === ''">
             <Skeleton :counter="12"/>
         </div>
-        <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
+        <!-- <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
             <div v-for="(video, i) in videos" :key="i">
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
             </div>
 
             <Skeleton :counter="4"/>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -119,23 +120,6 @@ export default {
     },
     data(){
         return {
-            error_message: "",
-            videos: [],
-            query: "",
-            next_page_token: "",
-            selected_tag: "All",
-            tags: [
-                "All",
-                "Music",
-                "Philippine Music",
-                "Playlist",
-                "Ed Sheeran",
-                "Live",
-                "Gaming",
-                "Contemporary R&B",
-                "News",
-                "Country Music"
-            ]
         }
     },
     mounted(){
