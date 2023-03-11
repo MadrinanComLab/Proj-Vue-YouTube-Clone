@@ -42,6 +42,7 @@ export default createStore({
          * @author MadriñanComputerLab
          */
         saveYouTubeVideos(state, { reset, youtube_videos }){
+            // console.log("Reset: ", reset);
             if(reset){
                 /** IF THE reset IS TRUE THEN SET THE NEW FETCH DATA AS NEW ARRAY */
                 state.videos = youtube_videos;
@@ -59,7 +60,7 @@ export default createStore({
          * Last Update: March 11, 2023
          * @function
          * @memberOf Store
-         * @param {object} commit - This will be provided by store 
+         * @param {object} dispatch - This will be provided by vuex. It was used to dispatch actions in this action (detectBottomPage) 
          * @param {object} event - Require input event.
          * @author MadriñanComputerLab
          */
@@ -74,7 +75,6 @@ export default createStore({
              */
             if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
                 /** this.query WILL BE GIVEN VALUE WHEN USER CLICKS TAG IN THE HEADER */
-                // this.fetchYouTubeVideos(this.query);
                 dispatch("fetchYouTubeVideos", { query: state.query });
             }
         },
@@ -90,7 +90,16 @@ export default createStore({
          * @param {boolean} reset = false - This will define if the array would be reset. If the value is false then the new fetch value will be appended to the existing array
          * @author MadriñanComputerLab
          */
-        fetchYouTubeVideos({ commit }, query = "", reset = false){
+        fetchYouTubeVideos({ commit, state }, {query, reset}){
+            /* Set query to empty if it wasn't specified upon dispatching of fetchYouTubeVideos() */
+            query ??= "";
+            
+            /* Set reset to false if it wasn't specified upon dispatching of fetchYouTubeVideos() */
+            reset ??= false;
+
+            console.log("Query: ", query);
+            console.log("Reset: ", reset);
+
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
 
@@ -102,7 +111,7 @@ export default createStore({
              * https://developers.google.com/youtube/v3/docs/videos/list#response
              * https://developers.google.com/youtube/v3/guides/implementation/pagination
              */
-            url += (this.next_page_token) ? `&pageToken=${ this.next_page_token }` : "";
+            url += (state.next_page_token) ? `&pageToken=${ state.next_page_token }` : "";
 
             YouTubeAPI.get(url)
                 .then(response => {
