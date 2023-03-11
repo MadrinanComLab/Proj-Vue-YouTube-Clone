@@ -7,7 +7,9 @@ export default {
     name: "Tag",
     methods: {
         fetchVideoByTags(e){
-            console.log("You click a tag!")
+            /* Return to the top of the page to prevent multiple API calls */
+            window.scrollTo(0, 0);
+
             /** THIS WILL BE USED LATER FOR PAGINATION */
             this.$store.state.query = e.target.innerText;
 
@@ -15,7 +17,6 @@ export default {
             this.$store.state.selected_tag = e.target.innerText;
 
             /** FETCH THE VIDEO */
-            // this.fetchYouTubeVideos(e.target.innerText, true);
             this.$store.dispatch("fetchYouTubeVideos", { query: e.target.innerText, reset: true });
         },
     }
