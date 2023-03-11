@@ -128,8 +128,7 @@ export default {
 
         if(localStorage.getItem("yt_videos")){
             /** IF THE 'yt_videos' IN LOCAL STORAGE IS NOT EMPTY THEN USE THAT VALUE. WE'RE CACHING THE VALUE SINCE THE API CALL IS NOT UNLIMITED. */
-            this.videos = JSON.parse(localStorage.getItem("yt_videos"));
-            console.log(JSON.parse(localStorage.getItem("yt_videos")));
+            this.$store.commit("saveYouTubeVideos", { reset: true, youtube_videos: JSON.parse(localStorage.getItem("yt_videos")) });
         }
         else{
             /** IF THE 'yt_videos' IN LOCAL STORAGE THEN FETCH THE VIDEOS */
