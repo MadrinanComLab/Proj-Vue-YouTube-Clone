@@ -63,7 +63,7 @@ export default createStore({
          * @param {object} event - Require input event.
          * @author MadriñanComputerLab
          */
-        detectBottomPage({ commit }, event){
+        detectBottomPage({ dispatch, state }, { event }){
             /** IF YOU REMOVE THE 'documentElement' AND YOU TRIED TO ACCESS e.target.offsetHeight, IT WILL BE UNDEFINED. ADDING THE documentElement RESOLVE THE PROBLEM:
              * https://stackoverflow.com/questions/51908241/when-trying-access-event-target-something-always-return-undefined
              */
@@ -74,10 +74,10 @@ export default createStore({
              */
             if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
                 /** this.query WILL BE GIVEN VALUE WHEN USER CLICKS TAG IN THE HEADER */
-                this.fetchYouTubeVideos(this.query);
+                // this.fetchYouTubeVideos(this.query);
+                dispatch("fetchYouTubeVideos", { query: state.query });
             }
         },
-
 
         /**
          * DOCU: Function to fetch YouTube videos
