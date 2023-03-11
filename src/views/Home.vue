@@ -6,14 +6,14 @@
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="$store.state.videos.length === 0 && $store.state.error_message === ''">
             <Skeleton :counter="12"/>
         </div>
-        <!-- <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
-            <div v-for="(video, i) in videos" :key="i">
+        <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
+            <div v-for="(video, i) in $store.state.videos" :key="i">
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
             </div>
 
             <Skeleton :counter="4"/>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
             let max_results_length = 16;
 
             let url = (query) ? `/search?part=snippet&maxResults=${ max_results_length }&q=${ query }&key=${ API_KEY }`
-                : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;;
+                : `/search?part=snippet&maxResults=${ max_results_length }&key=${ API_KEY }`;
 
             /** IF next_page_token IS NOT NULL THEN INCLUDE THE NEXT PAGE TOKEN IN API CALL.
              * REFRENCES FOR IMPLEMENTING PAGINATION IN YOUTUBE API:
@@ -124,7 +124,7 @@ export default {
     },
     mounted(){
         /** THIS WILL BE USED FOR DETECTING IF THE BOTTOM OF THE PAGE WAS REACHED */
-        window.addEventListener("scroll", this.detectBottomPage);
+        window.addEventListener("scroll", (e) => this.$store.dispatch("detectBottomPage", { event: e }));
 
         if(localStorage.getItem("yt_videos")){
             /** IF THE 'yt_videos' IN LOCAL STORAGE IS NOT EMPTY THEN USE THAT VALUE. WE'RE CACHING THE VALUE SINCE THE API CALL IS NOT UNLIMITED. */
@@ -133,7 +133,7 @@ export default {
         }
         else{
             /** IF THE 'yt_videos' IN LOCAL STORAGE THEN FETCH THE VIDEOS */
-           this.fetchYouTubeVideos(); 
+           this.$store.dispatch("fetchYouTubeVideos"); 
         }
     }
 };
