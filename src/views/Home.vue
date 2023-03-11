@@ -22,7 +22,6 @@ import Header from "@/components/Header.vue";
 import YouTubeVideo from "@/components/Cards/YouTubeVideo.vue";
 import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
 import Skeleton from "@/components/Cards/Skeleton.vue";
-import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default {
     name: "Home",
@@ -38,10 +37,6 @@ export default {
             /** FETCH THE VIDEO */
             this.fetchYouTubeVideos(e.target.innerText, true);
         },
-    },
-    data(){
-        return {
-        }
     },
     mounted(){
         /** THIS WILL BE USED FOR DETECTING IF THE BOTTOM OF THE PAGE WAS REACHED */
