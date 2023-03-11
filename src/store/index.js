@@ -30,8 +30,18 @@ export default createStore({
             state.error_message = error_message;
         },
 
+        /**
+         * DOCU: Function to save YouTube videos in the state above
+         * Triggered: This function will be triggered when fetchYouTubeVideos was dispatched
+         * Last Update: March 11, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {boolean} reset - This will be used to identify if the fetched video should be append in the existing record or to overwrite
+         * @param {object} youtube_videos - This is the value will be save in the youtube_videos state
+         * @author MadriñanComputerLab
+         */
         saveYouTubeVideos(state, { reset, youtube_videos }){
-            console.log("YouTube videos was set!", youtube_videos);
             if(reset){
                 /** IF THE reset IS TRUE THEN SET THE NEW FETCH DATA AS NEW ARRAY */
                 state.videos = youtube_videos;
@@ -96,8 +106,6 @@ export default createStore({
 
             YouTubeAPI.get(url)
                 .then(response => {
-                    console.log(response); // TODO TEMP...
-
                     /** Save the fetch YouTube video */
                     commit("saveYouTubeVideos", { reset: reset, youtube_videos: response.data.items });
 
