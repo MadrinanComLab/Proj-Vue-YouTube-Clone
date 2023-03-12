@@ -27,16 +27,6 @@ export default {
     name: "Home",
     components: { Header, YouTubeVideo, YouTubeChannel, Skeleton },
     methods:{
-        fetchVideoByTags(e){
-            /** THIS WILL BE USED LATER FOR PAGINATION */
-            this.query = e.target.innerText;
-
-            /** THIS WILL BE USED LATER FOR MODIFYING THE STYLE OF TAGS */
-            this.selected_tag = e.target.innerText;
-
-            /** FETCH THE VIDEO */
-            this.fetchYouTubeVideos(e.target.innerText, true);
-        },
     },
     mounted(){
         /** THIS WILL BE USED FOR DETECTING IF THE BOTTOM OF THE PAGE WAS REACHED */
