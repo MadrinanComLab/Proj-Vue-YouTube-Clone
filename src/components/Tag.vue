@@ -6,6 +6,15 @@
 export default {
     name: "Tag",
     methods: {
+        /**
+         * DOCU: Function to fetch YouTube videos based on the selected tag
+         * Triggered: This function will be triggered when user clicked the tag
+         * Last Update: March 15, 2023
+         * @function
+         * @memberOf Tag
+         * @param {object} e - This is the object provided by the span element or the 'tag'
+         * @author MadriñanComputerLab
+         */
         fetchVideoByTags(e){
             /* Return to the top of the page to prevent multiple API calls */
             window.scrollTo(0, 0);
