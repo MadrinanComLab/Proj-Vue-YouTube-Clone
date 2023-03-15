@@ -22,10 +22,30 @@ export default createStore({
         ]
     },
     mutations:{
+        /**
+         * DOCU: Function to save next_page_token in the next_page_token state above
+         * Triggered: This function will be triggered when fetchYouTubeVideos was dispatched
+         * Last Update: March 15, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {string} next_page_token - This will be used for pagination. The value of this will be use to update the next_page_token in state object
+         * @author MadriñanComputerLab
+         */
         saveNextPageToken(state, next_page_token){
             state.next_page_token = next_page_token;
         },
 
+        /**
+         * DOCU: Function to save error_message in the error_message state above
+         * Triggered: This function will be triggered if something wrong happen when fetchYouTubeVideos was dispatched
+         * Last Update: March 15, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {string} error_message - This will be used to display the error to user. The value of this will be use to update the error_message in state object
+         * @author MadriñanComputerLab
+         */
         saveErrorMessage(state, error_message){
             state.error_message = error_message;
         },
@@ -42,7 +62,6 @@ export default createStore({
          * @author MadriñanComputerLab
          */
         saveYouTubeVideos(state, { reset, youtube_videos }){
-            // console.log("Reset: ", reset);
             if(reset){
                 /** IF THE reset IS TRUE THEN SET THE NEW FETCH DATA AS NEW ARRAY */
                 state.videos = youtube_videos;
