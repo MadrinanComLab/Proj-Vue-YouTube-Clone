@@ -3,7 +3,7 @@ import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default createStore({
     state:{
-        is_loading: false,
+        is_loading: true,
         error_message: "",
         videos: [],
         query: "",
