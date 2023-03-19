@@ -6,14 +6,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: { title: "YouTube" }
+    component: Home
   },
   {
-    path: '/search',
+    path: '/result',
     name: 'Search',
-    component: Search,
-    meta: { title: "YouTube" }
+    component: Search
   },
   {
     path: '/about',
@@ -31,8 +29,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const query = to.params.query;
-    document.title = (typeof query === "undefined") ? to.meta.title : `${query} - ${to.meta.title}`;
+    /**
+     * Reference for using (?) link query:
+     * https://www.w3docs.com/snippets/vue-js/how-to-get-query-parameters-from-a-url-in-vue-js.html
+     */
+    const query = to.query.search_query;
+
+    document.title = (typeof query === "undefined") ? "YouTube" : `${query} - YouTube`;
     next();
 });
 
