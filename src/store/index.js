@@ -3,6 +3,7 @@ import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default createStore({
     state:{
+        is_loading: false,
         error_message: "",
         videos: [],
         query: "",
@@ -101,7 +102,7 @@ export default createStore({
         /**
          * DOCU: Function to fetch YouTube videos
          * Triggered: When user reached the bottom page, click tags at the header, or when the Home component was mounted.
-         * Last Update: March 11, 2023
+         * Last Update: March 19, 2023
          * @function
          * @memberOf Store
          * @param {object} commit - This will be provided by store 
@@ -110,6 +111,7 @@ export default createStore({
          * @author MadriñanComputerLab
          */
         fetchYouTubeVideos({ commit, state }, {query, reset}){
+            state.is_loading = true;
             /* Set query to empty if it wasn't specified upon dispatching of fetchYouTubeVideos() */
             query ??= "";
             
@@ -134,6 +136,9 @@ export default createStore({
 
             YouTubeAPI.get(url)
                 .then(response => {
+                    /** Set the is_loading to false to mark that it was done loading */
+                    state.is_loading = false;
+
                     /** Save the fetch YouTube video */
                     commit("saveYouTubeVideos", { reset: reset, youtube_videos: response.data.items });
 
