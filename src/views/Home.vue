@@ -6,7 +6,7 @@
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="$store.state.is_loading && $store.state.error_message === ''">
             <Skeleton :counter="12"/>
         </div>
-        <div class="px-[10%] grid grid-cols-4 gap-4" v-else  @scroll="() => console.log('Test')">
+        <div class="px-[10%] grid grid-cols-4 gap-4" v-else>
             <div v-for="(video, i) in $store.state.videos" :key="i">
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle"/>
