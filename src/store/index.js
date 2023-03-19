@@ -126,16 +126,8 @@ export default createStore({
          * @author MadriñanComputerLab
          */
         fetchYouTubeVideos({ commit, state }, {query, reset}){
+            /** set is_loading to true to mark it was loading */
             commit("changeIsLoading", true);
-
-            /* Set query to empty if it wasn't specified upon dispatching of fetchYouTubeVideos() */
-            query ??= "";
-            
-            /* Set reset to false if it wasn't specified upon dispatching of fetchYouTubeVideos() */
-            reset ??= false;
-
-            console.log("Query: ", query);
-            console.log("Reset: ", reset);
 
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
