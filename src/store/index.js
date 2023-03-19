@@ -24,6 +24,21 @@ export default createStore({
     },
     mutations:{
         /**
+         * DOCU: Function that will change the value of is_loading
+         * Triggered: This function will be triggered before and after getting the YouTube videos
+         * Last Update: March 20, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {boolean} new_value - This will be either true or false and this way was used for better readability of the code.
+         * @author MadriñanComputerLab
+         */
+        changeIsLoading(state, new_value){
+            /** state.is_loading = !state.is_loading was abandoned due to poor readability of the code */
+            state.is_loading = new_value;
+        },
+
+        /**
          * DOCU: Function to save next_page_token in the next_page_token state above
          * Triggered: This function will be triggered when fetchYouTubeVideos was dispatched
          * Last Update: March 15, 2023
@@ -111,7 +126,8 @@ export default createStore({
          * @author MadriñanComputerLab
          */
         fetchYouTubeVideos({ commit, state }, {query, reset}){
-            state.is_loading = true;
+            commit("changeIsLoading", true);
+
             /* Set query to empty if it wasn't specified upon dispatching of fetchYouTubeVideos() */
             query ??= "";
             
@@ -137,7 +153,7 @@ export default createStore({
             YouTubeAPI.get(url)
                 .then(response => {
                     /** Set the is_loading to false to mark that it was done loading */
-                    state.is_loading = false;
+                    commit("changeIsLoading", false);
 
                     /** Save the fetch YouTube video */
                     commit("saveYouTubeVideos", { reset: reset, youtube_videos: response.data.items });
