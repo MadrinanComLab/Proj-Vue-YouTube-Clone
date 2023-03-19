@@ -23,6 +23,10 @@ export default createStore({
         ]
     },
     mutations:{
+        setQuery(state, new_value){
+            state.query = new_value;
+        },
+
         /**
          * DOCU: Function that will change the value of is_loading
          * Triggered: This function will be triggered before and after getting the YouTube videos
