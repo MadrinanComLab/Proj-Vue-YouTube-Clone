@@ -50,6 +50,8 @@ export default {
          * @author MadriñanComputerLab
          */
         submitSearchQuery(){
+            this.$store.commit("setQuery", this.search_query);
+
             /** Reference for this approach of setting up link programmatically:
              * https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page
              */
