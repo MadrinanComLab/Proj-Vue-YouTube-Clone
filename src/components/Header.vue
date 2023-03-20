@@ -66,7 +66,7 @@ export default {
             this.$router.push({ name: 'Search', query: { search_query: this.search_query } });
             
             /** Fetch the YouTube video based on inputted YouTube query */
-            this.$store.dispatch("fetchYouTubeVideos", { query: this.search_query, reset: true }); 
+            this.$store.dispatch("fetchYouTubeVideos", { query: this.search_query, reset: true, do_loading_animation: true }); 
         }
     }
 }
