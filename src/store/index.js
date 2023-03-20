@@ -96,7 +96,7 @@ export default createStore({
         /**
          * DOCU: Function to detect the bottom page
          * Triggered: When user reached the bottom page.
-         * Last Update: March 11, 2023
+         * Last Update: March 21, 2023
          * @function
          * @memberOf Store
          * @param {object} dispatch - This will be provided by vuex. It was used to dispatch actions in this action (detectBottomPage) 
@@ -114,14 +114,14 @@ export default createStore({
              */
             if(Math.ceil(element.scrollTop + element.clientHeight) >= element.scrollHeight){
                 /** this.query WILL BE GIVEN VALUE WHEN USER CLICKS TAG IN THE HEADER */
-                dispatch("fetchYouTubeVideos", { query: state.query });
+                dispatch("fetchYouTubeVideos", { query: state.query, reset: false, do_loading_animation: false });
             }
         },
 
         /**
          * DOCU: Function to fetch YouTube videos
          * Triggered: When user reached the bottom page, click tags at the header, or when the Home component was mounted.
-         * Last Update: March 19, 2023
+         * Last Update: March 21, 2023
          * @function
          * @memberOf Store
          * @param {object} commit - This will be provided by store 
@@ -129,9 +129,12 @@ export default createStore({
          * @param {boolean} reset = false - This will define if the array would be reset. If the value is false then the new fetch value will be appended to the existing array
          * @author MadriñanComputerLab
          */
-        fetchYouTubeVideos({ commit, state }, {query, reset}){
-            /** set is_loading to true to mark it was loading */
-            commit("changeIsLoading", true);
+        fetchYouTubeVideos({ commit, state }, { query, reset, do_loading_animation }){
+            /** There are instances that we don't need the loading animation, specifically in pagination */
+            if(do_loading_animation){
+                /** set is_loading to true to mark it was loading */
+                commit("changeIsLoading", true);
+            }
 
             const API_KEY = process.env.VUE_APP_API_KEY;
             let max_results_length = 16;
@@ -148,8 +151,11 @@ export default createStore({
 
             YouTubeAPI.get(url)
                 .then(response => {
-                    /** Set the is_loading to false to mark that it was done loading */
-                    commit("changeIsLoading", false);
+                    /** There are instances that we don't need the loading animation, specifically in pagination */
+                    if(do_loading_animation){
+                        /** Set the is_loading to false to mark that it was done loading */
+                        commit("changeIsLoading", false);
+                    }
 
                     /** Save the fetch YouTube video */
                     commit("saveYouTubeVideos", { reset: reset, youtube_videos: response.data.items });
