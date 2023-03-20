@@ -2,7 +2,7 @@
     <div class="mb-6 sticky top-0 bg-[#0f0f0f] pb-5">
         <div class="px-[10%] py-4 grid grid-cols-3 gap-1 mb-3">
             <router-link to="/">
-                <div>
+                <div @click="goToTop">
                     <img src="@/assets/images/yt-logo-with-text.png" alt="YouTube-Logo" class="w-[150px]">
                 </div>
             </router-link>
@@ -41,6 +41,10 @@ export default {
         this.search_query = this.$route.query.search_query;
     },
     methods: {
+        goToTop(){
+            window.scrollTo(0, 0);
+        },
+
         /**
          * DOCU: Function to redirect the page to Search result and put the search query on the link.
          * Triggered: When user submit the search form
@@ -50,12 +54,19 @@ export default {
          * @author MadriñanComputerLab
          */
         submitSearchQuery(){
+            /** Go to the top of the page after submitting the search query */
+            this.goToTop();
+
+            /** Possibly removed this later... */
             this.$store.commit("setQuery", this.search_query);
 
             /** Reference for this approach of setting up link programmatically:
              * https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page
              */
             this.$router.push({ name: 'Search', query: { search_query: this.search_query } });
+            
+            /** Fetch the YouTube video based on inputted YouTube query */
+            this.$store.dispatch("fetchYouTubeVideos", { query: this.search_query, reset: true }); 
         }
     }
 }
