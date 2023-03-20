@@ -1,8 +1,9 @@
 <template>
     <div class="w-full">
+        <!--/ Reference for rendering HTML entities in Vue: https://stackoverflow.com/questions/46756802/vue-js-auto-convert-html-and-unicode-entities /-->
         <img class="w-full min-h-[245px] mb-2" :src="thumbnail" alt="">
-        <h2 class="text-white font-bold">{{ title }}</h2>
-        <p class="text-[#888] text-sm">{{ channel_title }}</p>
+        <h2 class="text-white font-bold" v-html="title"></h2>
+        <p class="text-[#888] text-sm" v-html="channel_title"></p>
     </div>
 </template>
 
