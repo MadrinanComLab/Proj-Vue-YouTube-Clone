@@ -41,6 +41,14 @@ export default {
         this.search_query = this.$route.query.search_query;
     },
     methods: {
+        /**
+         * DOCU: Function to go to the top of the page
+         * Triggered: When user click the logo/brand name of the page or when user submit the search query
+         * Last Update: March 21, 2023
+         * @function
+         * @memberOf Header
+         * @author MadriñanComputerLab
+         */
         goToTop(){
             window.scrollTo(0, 0);
         },
@@ -48,7 +56,7 @@ export default {
         /**
          * DOCU: Function to redirect the page to Search result and put the search query on the link.
          * Triggered: When user submit the search form
-         * Last Update: March 19, 2023
+         * Last Update: March 21, 2023
          * @function
          * @memberOf Header
          * @author MadriñanComputerLab
@@ -57,7 +65,7 @@ export default {
             /** Go to the top of the page after submitting the search query */
             this.goToTop();
 
-            /** Possibly removed this later... */
+            /** This will be used in paginating through the search results */
             this.$store.commit("setQuery", this.search_query);
 
             /** Reference for this approach of setting up link programmatically:
