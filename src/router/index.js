@@ -1,6 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Search from '../views/Search.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import store from "../store";
+import Home from '../views/Home.vue';
+import Search from '../views/Search.vue';
+import VideoPlayer from '../views/VideoPlayer.vue';
 
 const routes = [
   {
@@ -12,6 +14,11 @@ const routes = [
     path: '/result',
     name: 'Search',
     component: Search
+  },
+  {
+    path: '/watch',
+    name: 'VideoPlayer',
+    component: VideoPlayer
   },
   {
     path: '/about',
@@ -33,9 +40,9 @@ router.beforeEach((to, from, next) => {
      * Reference for using (?) link query:
      * https://www.w3docs.com/snippets/vue-js/how-to-get-query-parameters-from-a-url-in-vue-js.html
      */
-    const query = to.query.search_query;
+    let subtitle = to.query.search_query ?? store.state.selected_video_title ?? "";
 
-    document.title = (typeof query === "undefined") ? "YouTube" : `${query} - YouTube`;
+    document.title = (subtitle) ? `${ subtitle } - YouTube` : "YouTube";
     next();
 });
 
