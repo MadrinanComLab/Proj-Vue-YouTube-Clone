@@ -8,6 +8,7 @@ export default createStore({
         videos: [],
         query: "",
         next_page_token: "",
+        selected_video_title: "",
         selected_tag: "All",
         tags: [
             "All",
@@ -25,6 +26,10 @@ export default createStore({
     mutations:{
         setQuery(state, new_value){
             state.query = new_value;
+        },
+
+        setVideoTitle(state, new_value){
+            state.selected_video_title = new_value;
         },
 
         /**
