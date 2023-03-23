@@ -24,12 +24,32 @@ export default createStore({
         ]
     },
     mutations:{
-        setQuery(state, new_value){
-            state.query = new_value;
+        /**
+         * DOCU: Function that will change the value of query and this query will be used in paginating search results.
+         * Triggered: This function will be triggered when user submit search query.
+         * Last Update: March 24, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {boolean} query - This will be the new value of  state query.
+         * @author MadriñanComputerLab
+         */
+        setQuery(state, query){
+            state.query = query;
         },
 
-        setVideoTitle(state, new_value){
-            state.selected_video_title = new_value;
+        /**
+         * DOCU: Function that will change the value of selected_video_title and this title will be used in document title
+         * Triggered: This function will be triggered when user clicked a YouTube video to play
+         * Last Update: March 24, 2023
+         * @function
+         * @memberOf Store
+         * @param {object} state - This is the object used to access the state object above
+         * @param {boolean} title - This will be the new document title .
+         * @author MadriñanComputerLab
+         */
+        setVideoTitle(state, title){
+            state.selected_video_title = title;
         },
 
         /**
