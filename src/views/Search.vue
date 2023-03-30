@@ -7,10 +7,10 @@
             <Skeleton :counter="12"/>
         </div>
 
-        <div class="px-[27%] grid grid-cols-1 gap-2" v-else>
+        <div class="px-[25%] grid grid-cols-1 gap-2" v-else>
             <div v-for="(video, i) in $store.state.videos" :key="i">
                 <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
-                <VideoResult v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId" :description="video.snippet.description"/>
+                <VideoResult v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId" :description="video.snippet.description" :show_description="true" :thumbnail_height="'160px'"/>
             </div>
 
             <Skeleton :counter="1"/>
