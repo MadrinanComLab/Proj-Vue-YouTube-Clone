@@ -41,7 +41,7 @@ export default {
         }
         else{
             /** IF THE 'yt_videos' IN LOCAL STORAGE THEN FETCH THE VIDEOS */
-           this.$store.dispatch("fetchYouTubeVideos", { query: this.$store.query, reset: true }); 
+           this.$store.dispatch("fetchYouTubeVideos", { query: this.$store.state.query, reset: true, do_loading_animation: true }); 
         }
     }
 };

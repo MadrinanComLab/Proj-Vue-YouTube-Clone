@@ -26,7 +26,7 @@ export default {
             this.$store.state.selected_tag = e.target.innerText;
 
             /** FETCH THE VIDEO */
-            this.$store.dispatch("fetchYouTubeVideos", { query: e.target.innerText, reset: true });
+            this.$store.dispatch("fetchYouTubeVideos", { query: e.target.innerText, reset: true, do_loading_animation: true });
         },
     }
 }
