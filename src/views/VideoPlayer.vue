@@ -18,7 +18,7 @@
                 <div v-for="(video, i) in $store.state.videos" :key="i">
                     <!-- Used different component for this. The other suggested videos are displayed differently -->
                     <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
-                    <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId"/>
+                    <VideoResult v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId" :show_description="false"/>
                 </div>
             </div>
         </div>
@@ -28,12 +28,12 @@
 <script>
 import Header from "@/components/Header.vue";
 import Skeleton from "@/components/Cards/Skeleton.vue";
-import YouTubeVideo from "@/components/Cards/YouTubeVideo.vue";
+import VideoResult from "@/components/Cards/VideoResult.vue";
 import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
 
 export default {
     name: "VideoPlayer",
-    components: { Header, Skeleton, YouTubeVideo, YouTubeChannel },
+    components: { Header, Skeleton, VideoResult, YouTubeChannel },
     data() {
         return {
             /** This variable was declared for better readability */
