@@ -29,20 +29,11 @@ export default {
     methods:{
     },
     mounted(){
-        /** THIS WILL BE USED FOR DETECTING IF THE BOTTOM OF THE PAGE WAS REACHED */
+        /* This will be used for detecting if the bottom of the page was reached */
         window.addEventListener("scroll", (e) => this.$store.dispatch("detectBottomPage", { event: e }));
 
-        if(localStorage.getItem("yt_videos")){
-            /** is_loading has a default value of true and now set it to false to mark it was done loading */
-            this.$store.commit("changeIsLoading", false);
-
-            /** IF THE 'yt_videos' IN LOCAL STORAGE IS NOT EMPTY THEN USE THAT VALUE. WE'RE CACHING THE VALUE SINCE THE API CALL IS NOT UNLIMITED. */
-            this.$store.commit("saveYouTubeVideos", { reset: true, youtube_videos: JSON.parse(localStorage.getItem("yt_videos")) });
-        }
-        else{
-            /** IF THE 'yt_videos' IN LOCAL STORAGE THEN FETCH THE VIDEOS */
-           this.$store.dispatch("fetchYouTubeVideos", { query: this.$store.state.query, reset: true, do_loading_animation: true }); 
-        }
+        /* Get the cached video */
+        this.$store.dispatch("getCachedVideos");
     }
 };
 </script>
