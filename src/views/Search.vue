@@ -30,6 +30,9 @@ export default {
     mounted(){
         /** This will be used for detecting if the bottom of the page was reached */
         window.addEventListener("scroll", (e) => this.$store.dispatch("detectBottomPage", { event: e }));
+        
+        /* Get the cached video */
+        this.$store.dispatch("getCachedVideos");
     }
 }
 </script>
