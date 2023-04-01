@@ -198,6 +198,31 @@ export default createStore({
                     /** DISPLAY THE ERROR MESSAGE ON USER */
                     commit("saveErrorMessage", err);
                 });
+        },
+
+        /**
+         * DOCU: Function to get the cached YouTube videos
+         * Triggered: When user access all of our pages: Home, Search and Video Player page
+         * Last Update: April 2, 2023
+         * @function
+         * @memberOf Store
+         * @param {function} commit - This will be provided by store. Will be used in committing the mutations of vuex
+         * @param {function} dispatch - This will be provided by store. Will be used in dispatching actions of vuex
+         * @param {function} state - This will be provided by store. Will be used to access the state object of vuex
+         * @author MadriñanComputerLab
+         */
+        getCachedVideos({ commit, dispatch, state }){
+            if(localStorage.getItem("yt_videos")){
+                /* is_loading has a default value of true and now set it to false to mark it was done loading */
+                commit("changeIsLoading", false);
+    
+                /* If the 'yt_videos' in local storage is not empty then use that value. We're caching the value since the API call is not unlimited */
+                commit("saveYouTubeVideos", { reset: true, youtube_videos: JSON.parse(localStorage.getItem("yt_videos")) });
+            }
+            else{
+                /* If the 'yt_videos' in local storage is empty, then fetch a video from the API */
+               dispatch("fetchYouTubeVideos", { query: state.query, reset: true, do_loading_animation: true }); 
+            }
         }
     },
     getters:{
