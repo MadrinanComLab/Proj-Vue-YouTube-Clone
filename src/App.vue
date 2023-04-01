@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+      $route(to, from){
+            /** Removed cached videos since each page has it own videos to load */
+            localStorage.removeItem("yt_videos");
+      }
+  }
 }
 </script>
 
