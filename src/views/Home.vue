@@ -4,7 +4,7 @@
         <Header :display_tags="true"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="$store.state.is_loading && $store.state.error_message === ''">
-            <Skeleton :counter="12"/>
+            <Skeleton :counter="12" :orientation="constants.VERTICAL"/>
         </div>
         <div class="px-[10%] grid grid-cols-4 gap-4" v-else>
             <div v-for="(video, i) in $store.state.videos" :key="i">
@@ -22,11 +22,15 @@ import Header from "@/components/Header.vue";
 import YouTubeVideo from "@/components/Cards/YouTubeVideo.vue";
 import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
 import Skeleton from "@/components/Cards/Skeleton.vue";
+import constants from "@/config/constants";
 
 export default {
     name: "Home",
     components: { Header, YouTubeVideo, YouTubeChannel, Skeleton },
-    methods:{
+    data(){
+        return {
+            constants: constants
+        }
     },
     mounted(){
         /* This will be used for detecting if the bottom of the page was reached */
