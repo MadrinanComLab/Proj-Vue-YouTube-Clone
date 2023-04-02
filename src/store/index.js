@@ -146,12 +146,14 @@ export default createStore({
         /**
          * DOCU: Function to fetch YouTube videos
          * Triggered: When user reached the bottom page, click tags at the header, or when the Home component was mounted.
-         * Last Update: March 21, 2023
+         * Last Update: April 2, 2023
          * @function
          * @memberOf Store
-         * @param {object} commit - This will be provided by store 
-         * @param {string} query = "" - Optional value, this will be used when user search for specific video or if the user select a tag in the header.
-         * @param {boolean} reset = false - This will define if the array would be reset. If the value is false then the new fetch value will be appended to the existing array
+         * @param {function} commit - This will be provided by store. Will be used in committing the mutations of vuex
+         * @param {function} state - This will be provided by store. Will be used to access the state object of vuex
+         * @param {string} query - This will be used when user search for specific video or if the user select a tag in the header.
+         * @param {boolean} reset - This will define if the array of videos would be reset. If the value is false then the new fetch value will be appended to the existing array
+         * @param {boolean} do_loading_animation - This will define if the skeleton loading would be used.
          * @author MadriñanComputerLab
          */
         fetchYouTubeVideos({ commit, state }, { query, reset, do_loading_animation }){
