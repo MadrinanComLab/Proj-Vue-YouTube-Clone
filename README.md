@@ -55,6 +55,14 @@ I've placed the API key in dotenv for security purposes, so in this part of READ
             });
     }
 ```
+
+## Vuex-Persistedstate Library
+`vuex-persistedstate` library was used in this project, this is used to prevent the state object from resetting if the page reloads.
+
+<b>Sources for this:</b>
+• https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
+• https://www.npmjs.com/package/vuex-persistedstate
+
 ---
 ### Did You Like This Project?
 Stay tuned for upcoming projects and experiments by following me on the following accounts:
