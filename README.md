@@ -56,6 +56,9 @@ I've placed the API key in dotenv for security purposes, so in this part of READ
     }
 ```
 
+## Vuex (Vue's State Management Library)
+This application uses `Vuex` to handle the data shared through all of the components. <b>Madriñan Computer Laboratory</b> conducted an experiment to better understand this before implementing it here. You can access the repository of the experiment, just click this [link](https://github.com/MadrinanComLab/Exp-Vuex).
+
 ## Vuex-Persistedstate Library
 `vuex-persistedstate` library was used in this project, this is used to prevent the state object from resetting if the page reloads.
 
@@ -63,7 +66,13 @@ I've placed the API key in dotenv for security purposes, so in this part of READ
 • https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
 • https://www.npmjs.com/package/vuex-persistedstate
 
----
+## Vue Watcher
+This project implements a `watcher` and this project use this to removed the cached video data when the `URL` changes.
+
+The following link are the reference for `watcher`:
+• https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
+• https://vuejs.org/guide/essentials/watchers.html#basic-example
+
 ### Did You Like This Project?
 Stay tuned for upcoming projects and experiments by following me on the following accounts:
 <p float="left">
