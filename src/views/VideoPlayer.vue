@@ -11,6 +11,7 @@
                 /-->
                 <iframe className="w-full h-[500px] mb-3" :src="`http://www.youtube.com/embed/${ selected_video_id }?enablejsapi=1&origin=http://example.com`"></iframe>
                 <h2 class="text-white text-xl font-bold mb-3" v-html="selected_video_object.snippet?.title"></h2>
+
                 <p v-html="selected_video_object.snippet?.description" class="bg-[#272727] text-white p-2 rounded-md"></p>
                 <!-- Comment section -->
             </div>
@@ -31,6 +32,7 @@ import Header from "@/components/Header.vue";
 import Skeleton from "@/components/Cards/Skeleton.vue";
 import VideoResult from "@/components/Cards/VideoResult.vue";
 import YouTubeChannel from "@/components/Cards/YouTubeChannel.vue";
+import YouTubeAPI from "@/api/YouTubeAPI";
 
 export default {
     name: "VideoPlayer",
@@ -39,19 +41,45 @@ export default {
         return {
             /** This variable was declared for better readability */
             selected_video_id: this.$route.query.v,
-            selected_video_object: {}
+            selected_video_object: {},
+            channel_profile_url: "",
+            channel_title: ""
         }
     },
     mounted(){
-        // console.log(JSON.stringify(this.$store.state.videos[0].id.videoId));
-
         for(let video of this.$store.state.videos){
             if(video.id.videoId === this.selected_video_id){
                 this.selected_video_object = video;
             }
         }
 
-        console.log("TEST", this.selected_video_object.snippet);
+        /* Get the information of channel */
+        this.fetchChannel(this.selected_video_object.snippet.channelId);
+    },
+    methods:{
+        /**
+         * DOCU: Function to information of the channel
+         * Triggered: When the page loads
+         * Last Update: April 7, 2023
+         * @function
+         * @memberOf Store
+         * @param {string} channel_id - This contain the channel id.
+         * @author MadriñanComputerLab
+         */
+        fetchChannel(channel_id){
+            /*
+             * Source for getting the data of a channel:
+             * https://stackoverflow.com/questions/12890828/how-to-get-channel-related-data-from-youtube-api
+             */
+            const API_KEY = process.env.VUE_APP_API_KEY;
+            let url = `/channels?part=snippet&id=${channel_id}&key=${API_KEY}`;
+
+            YouTubeAPI.get(url)
+                .then(response => {
+                    this.channel_profile_url = response.data.items[0].snippet.thumbnails.medium.url;
+                    this.channel_title = response.data.items[0].snippet.localized.title;
+                });
+        }
     }
 }
 </script>
