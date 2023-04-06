@@ -1,12 +1,25 @@
 # Welcome to YouTube Clone using Vue JS!
 This project was created on January 21, 2023
 
+## Table of Contents:
+<b>•</b> [Technologies used in this Project](#tech_used)
+<b>•</b> [Commands for this Application](#app_commands)
+<b>•</b> [Setting up the YouTube API to your Local Repo](#api_setup)
+<b>•</b> [Vuex (Vue's State Management Library)](#vuex)
+<b>•</b> [Vuex-Persistedstate Library](#vuex_persisted_state)
+<b>•</b> [Vue Watcher](#vue_watch)
+
+<section id="tech_used"></section>
+
 ## Technologies used in this Project:
 <p>
     <img src="https://user-images.githubusercontent.com/74145874/203150691-6cdb51ef-bbb8-45a5-9ad9-be9cd7d379ce.png" width="100px" height="100px" alt="Vue JS" title="Vue JS"/>
     <img src="https://user-images.githubusercontent.com/74145874/203151252-c9855797-b043-4385-82c7-4986cfdd222e.png" width="100px" height="100px" alt="Tailwind CSS" title="Tailwind CSS"/>
 </p>
 
+<section id="app_commands"></section>
+
+## Commands for this Application
 Before you run this app, install the dependencies first, by running this command:
 ```
 npm install
@@ -23,6 +36,8 @@ npx tailwindcss-cli build -i ./src/input.css -o ./dist/output.css --watch
 ```
 
 ***Note:*** If you tried to modify the Tailwind and it didn't work, please try to restart the Vue server.
+
+<section id="api_setup"></section>
 
 ## Setting up the YouTube API to your Local Repo
 I've placed the API key in dotenv for security purposes, so in this part of README.md, I will guide you on how to setup your own key and gain access to the YouTube API.
@@ -56,15 +71,21 @@ I've placed the API key in dotenv for security purposes, so in this part of READ
     }
 ```
 
+<section id="vuex"></section>
+
 ## Vuex (Vue's State Management Library)
 This application uses `Vuex` to handle the data shared through all of the components. <b>Madriñan Computer Laboratory</b> conducted an experiment to better understand this before implementing it here. You can access the repository of the experiment, just click this [link](https://github.com/MadrinanComLab/Exp-Vuex).
+
+<section id="vuex_persisted_state"></section>
 
 ## Vuex-Persistedstate Library
 `vuex-persistedstate` library was used in this project, this is used to prevent the state object from resetting if the page reloads.
 
 <b>Sources for this:</b>
-• https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
-• https://www.npmjs.com/package/vuex-persistedstate
+<b>•</b> https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
+<b>•</b> https://www.npmjs.com/package/vuex-persistedstate
+
+<section id="vue_watch"></section>
 
 ## Vue Watcher
 This project implements a `watcher` and this project use this to removed the cached video data when the `URL` changes.
