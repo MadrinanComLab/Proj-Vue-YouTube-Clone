@@ -2,11 +2,11 @@
 This project was created on January 21, 2023
 
 ## Table of Contents:
-<b>•</b> [Technologies used in this Project](#tech_used)
-<b>•</b> [Commands for this Application](#app_commands)
-<b>•</b> [Setting up the YouTube API to your Local Repo](#api_setup)
-<b>•</b> [Vuex (Vue's State Management Library)](#vuex)
-<b>•</b> [Vuex-Persistedstate Library](#vuex_persisted_state)
+<b>•</b> [Technologies used in this Project](#tech_used) <br/>
+<b>•</b> [Commands for this Application](#app_commands) <br/>
+<b>•</b> [Setting up the YouTube API to your Local Repo](#api_setup) <br/>
+<b>•</b> [Vuex (Vue's State Management Library)](#vuex) <br/>
+<b>•</b> [Vuex-Persistedstate Library](#vuex_persisted_state) <br/>
 <b>•</b> [Vue Watcher](#vue_watch)
 
 <section id="tech_used"></section>
@@ -82,8 +82,8 @@ This application uses `Vuex` to handle the data shared through all of the compon
 `vuex-persistedstate` library was used in this project, this is used to prevent the state object from resetting if the page reloads.
 
 <b>Sources for this:</b>
-<b>•</b> https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
-<b>•</b> https://www.npmjs.com/package/vuex-persistedstate
+<b>•</b> https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh  <br/>
+<b>•</b> https://www.npmjs.com/package/vuex-persistedstate  <br/>
 
 <section id="vue_watch"></section>
 
@@ -91,8 +91,8 @@ This application uses `Vuex` to handle the data shared through all of the compon
 This project implements a `watcher` and this project use this to removed the cached video data when the `URL` changes.
 
 The following link are the reference for `watcher`:
-• https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
-• https://vuejs.org/guide/essentials/watchers.html#basic-example
+<b>•</b> https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change  <br/>
+<b>•</b> https://vuejs.org/guide/essentials/watchers.html#basic-example  <br/>
 
 ### Did You Like This Project?
 Stay tuned for upcoming projects and experiments by following me on the following accounts:
