@@ -81,7 +81,7 @@ This application uses `Vuex` to handle the data shared through all of the compon
 ## Vuex-Persistedstate Library
 `vuex-persistedstate` library was used in this project, this is used to prevent the state object from resetting if the page reloads.
 
-<b>Sources for this:</b>
+<b>Sources for this:</b> <br/>
 <b>•</b> https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh  <br/>
 <b>•</b> https://www.npmjs.com/package/vuex-persistedstate  <br/>
 
@@ -90,7 +90,7 @@ This application uses `Vuex` to handle the data shared through all of the compon
 ## Vue Watcher
 This project implements a `watcher` and this project use this to removed the cached video data when the `URL` changes.
 
-The following link are the reference for `watcher`:
+The following link are the reference for `watcher`:  <br/>
 <b>•</b> https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change  <br/>
 <b>•</b> https://vuejs.org/guide/essentials/watchers.html#basic-example  <br/>
 
