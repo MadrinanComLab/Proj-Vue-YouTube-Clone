@@ -70,12 +70,9 @@ export default {
         }
     },
     mounted(){
-        for(let video of this.$store.state.videos){
-            if(video.id.videoId === this.selected_video_id){
-                this.selected_video_object = video;
-            }
-        }
-        
+        /** Getting the additional video information such as title and description */
+        getSelectedVideoInfo();
+
         /** Go to the top of the page after submitting the search query */
         this.goToTop();
 
@@ -85,7 +82,7 @@ export default {
     methods:{
         /**
          * DOCU: Function to go to the top of the page
-         * Triggered: When user click the logo/brand name of the page or when user submit the search query
+         * Triggered: When the page loads
          * Last Update: April 8, 2023
          * @function
          * @memberOf Header
@@ -96,11 +93,27 @@ export default {
         },
 
         /**
+         * DOCU: Function to information of the selected video
+         * Triggered: When the page loads
+         * Last Update: April 8, 2023
+         * @function
+         * @memberOf VideoPlayer
+         * @author MadriñanComputerLab
+         */
+        getSelectedVideoInfo(){
+            for(let video of this.$store.state.videos){
+                if(video.id.videoId === this.selected_video_id){
+                    this.selected_video_object = video;
+                }
+            }
+        },
+
+        /**
          * DOCU: Function to information of the channel
          * Triggered: When the page loads
          * Last Update: April 7, 2023
          * @function
-         * @memberOf Store
+         * @memberOf VideoPlayer
          * @param {string} channel_id - This contain the channel id.
          * @author MadriñanComputerLab
          */
