@@ -42,18 +42,6 @@ export default {
     },
     methods: {
         /**
-         * DOCU: Function to go to the top of the page
-         * Triggered: When user click the logo/brand name of the page or when user submit the search query
-         * Last Update: March 21, 2023
-         * @function
-         * @memberOf Header
-         * @author MadriñanComputerLab
-         */
-        goToTop(){
-            window.scrollTo(0, 0);
-        },
-
-        /**
          * DOCU: Function to redirect the page to Search result and put the search query on the link.
          * Triggered: When user submit the search form
          * Last Update: March 21, 2023
@@ -62,9 +50,6 @@ export default {
          * @author MadriñanComputerLab
          */
         submitSearchQuery(){
-            /** Go to the top of the page after submitting the search query */
-            this.goToTop();
-
             /** This will be used in paginating through the search results */
             this.$store.commit("setQuery", this.search_query);
 

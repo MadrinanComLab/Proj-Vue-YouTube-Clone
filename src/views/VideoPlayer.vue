@@ -75,11 +75,26 @@ export default {
                 this.selected_video_object = video;
             }
         }
+        
+        /** Go to the top of the page after submitting the search query */
+        this.goToTop();
 
         /* Get the information of channel */
         this.fetchChannel(this.selected_video_object.snippet.channelId);
     },
     methods:{
+        /**
+         * DOCU: Function to go to the top of the page
+         * Triggered: When user click the logo/brand name of the page or when user submit the search query
+         * Last Update: April 8, 2023
+         * @function
+         * @memberOf Header
+         * @author MadriñanComputerLab
+         */
+        goToTop(){
+            window.scrollTo(0, 0);
+        },
+
         /**
          * DOCU: Function to information of the channel
          * Triggered: When the page loads
