@@ -12,7 +12,7 @@
                 <YouTubeVideo v-else :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId"/>
             </div>
 
-            <Skeleton :counter="4"/>
+            <Skeleton :counter="4" :orientation="constants.VERTICAL"/>
         </div>
     </div>
 </template>
