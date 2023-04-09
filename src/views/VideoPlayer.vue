@@ -43,7 +43,7 @@
                 <div v-for="(video, i) in $store.state.videos" :key="i">
                     <!-- Used different component for this. The other suggested videos are displayed differently -->
                     <YouTubeChannel v-if="video.id.kind === 'youtube#channel'" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title"/>
-                    <VideoResult v-else-if="video.id.videoId !== selected_video_id" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId" :show_description="false"/>
+                    <VideoResult v-else-if="video.id.videoId !== selected_video_id" :thumbnail="video.snippet.thumbnails.high.url" :title="video.snippet.title" :channel_title="video.snippet.channelTitle" :video_id="video.id.videoId" :show_description="false" :changeSelectedVideo="changeSelectedVideo"/>
                 </div>
             </div>
         </div>
@@ -100,6 +100,14 @@ export default {
             window.scrollTo(0, 0);
         },
 
+        /**
+         * DOCU: Function for getting the reactions (like and dislike) for the selected video
+         * Triggered: When pages loads
+         * Last Update: April 9, 2023
+         * @function
+         * @memberOf VideoPlayer
+         * @author MadriñanComputerLab
+         */
         fetchVideoReactions(){
             let video_reactions = JSON.parse(localStorage.getItem("video_reactions")) || {};
 
@@ -138,6 +146,32 @@ export default {
 
             /* Save the new reaction */
             localStorage.setItem("video_reactions", JSON.stringify({ ...video_reactions, [this.selected_video_id]: new_reactions }));
+        },
+
+        /**
+         * DOCU: Function for handling the necessary changes when user select a new video to play.
+         * Triggered: When user click a video from the list of video in this component.
+         * Last Update: April 10, 2023
+         * @function
+         * @memberOf VideoPlayer
+         * @param video_id - This is the id of selected video
+         * @author MadriñanComputerLab
+         */
+        changeSelectedVideo(video_id){
+            /* Update the selected_video_id */
+            this.selected_video_id = video_id;
+
+            /* Getting the additional video information such as title and description */
+            this.getSelectedVideoInfo();
+
+            /* Go to the top of the page after submitting the search query */
+            this.goToTop();
+
+            /* Get the information of channel */
+            this.fetchChannel(this.selected_video_object.snippet.channelId);
+
+            /* Getting the number of likes and dislikes of the selected video */
+            this.fetchVideoReactions();
         },
 
         /**

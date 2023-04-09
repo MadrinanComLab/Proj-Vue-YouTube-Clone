@@ -16,12 +16,14 @@
 <script>
 export default {
     name: "VideoResult",
-    props: [ "thumbnail", "title", "channel_title", "video_id", "description", "show_description", "thumbnail_height" ],
+    props: [ "thumbnail", "title", "channel_title", "video_id", "description", "show_description", "thumbnail_height", "changeSelectedVideo" ],
     methods: {
         handleSelectedVideo(video_title){
             //TODO: This same function was also used in Home component. Move this on the Vuex store later...
             /** Save the title of selected video in the store */
             this.$store.commit("setVideoTitle", video_title);
+
+            this.changeSelectedVideo(this.video_id);
         }
     }
 }
