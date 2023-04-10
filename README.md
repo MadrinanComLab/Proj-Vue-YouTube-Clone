@@ -95,6 +95,8 @@ The following link are the reference for `watcher`:  <br/>
 <b>•</b> https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change  <br/>
 <b>•</b> https://vuejs.org/guide/essentials/watchers.html#basic-example  <br/>
 
+---
+
 ### Did You Like This Project?
 Stay tuned for upcoming projects and experiments by following me on the following accounts:
 <p float="left">
