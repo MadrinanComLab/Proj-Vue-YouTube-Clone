@@ -1,4 +1,5 @@
 # Welcome to YouTube Clone using Vue JS!
+![Banner (2)](https://user-images.githubusercontent.com/74145874/231018519-1a377066-dfb9-498d-a817-6f891d0daab0.jpg)
 This project was created on January 21, 2023
 
 ## Table of Contents:
