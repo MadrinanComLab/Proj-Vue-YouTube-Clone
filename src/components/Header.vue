@@ -2,7 +2,7 @@
     <div :class="`${ (display_tags) ? 'mb-6 ' : '' }sticky top-0 bg-[#0f0f0f] pb-5`">
         <div :class="`${ (display_tags) ? 'mb-3 ' : '' }px-[10%] py-4 grid grid-cols-3 gap-1`">
             <router-link to="/">
-                <div @click="goToTop">
+                <div @click="goHome">
                     <img src="@/assets/images/yt-logo-with-text.png" alt="YouTube-Logo" class="w-[150px]">
                 </div>
             </router-link>
@@ -60,6 +60,33 @@ export default {
             
             /** Fetch the YouTube video based on inputted YouTube query */
             this.$store.dispatch("fetchYouTubeVideos", { query: this.search_query, reset: true, do_loading_animation: true }); 
+        },
+
+        /**
+         * DOCU: Function to go to the top of the page
+         * Triggered: When the page loads
+         * Last Update: April 11, 2023
+         * @function
+         * @memberOf VideoPlayer
+         * @author MadriñanComputerLab
+         */
+        goToTop(){
+            window.scrollTo(0, 0);
+        },
+
+        /**
+         * DOCU: Function to reset the document title into an empty string and return to the top of the page.
+         * Triggered: When user click the brand name in the header
+         * Last Update: April 11, 2023
+         * @function
+         * @memberOf Header
+         * @author MadriñanComputerLab
+         */
+        goHome(){
+            /* In home page, the title must be 'YouTube', so we will set the title in vuex into an empty string */
+            this.$store.commit("setVideoTitle", "");
+
+            this.goToTop();
         }
     }
 }
