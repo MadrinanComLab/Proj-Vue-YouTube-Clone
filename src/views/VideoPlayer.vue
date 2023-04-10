@@ -133,14 +133,14 @@ export default {
                 /* Prepare the new_reactions object */
                 new_reactions = { likes: this.total_likes + 1, dislikes: this.total_dislikes };
 
-                /* Update the UI */
+                /* Increase the likes */
                 this.total_likes += 1;
             }
             else{
                 /* Prepare the new_reactions object */
                 new_reactions = { likes: this.total_likes, dislikes: this.total_dislikes + 1 };
 
-                /* Update the UI */
+                /* Increase the dislikes */
                 this.total_dislikes += 1;
             }
 

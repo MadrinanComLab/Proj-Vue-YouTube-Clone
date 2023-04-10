@@ -19,13 +19,13 @@ export default {
             /* Return to the top of the page to prevent multiple API calls */
             window.scrollTo(0, 0);
 
-            /** THIS WILL BE USED LATER FOR PAGINATION */
+            /* This will be used later for pagination */
             this.$store.state.query = e.target.innerText;
 
-            /** THIS WILL BE USED LATER FOR MODIFYING THE STYLE OF TAGS */
+            /* This will be used later for modifying the style of tags */
             this.$store.state.selected_tag = e.target.innerText;
 
-            /** FETCH THE VIDEO */
+            /* Fetch the video */
             this.$store.dispatch("fetchYouTubeVideos", { query: e.target.innerText, reset: true, do_loading_animation: true });
         },
     }

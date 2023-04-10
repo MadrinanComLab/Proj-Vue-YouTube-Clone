@@ -1,5 +1,4 @@
 <template>
-
     <!--/ Reference for rendering HTML entities in Vue: https://stackoverflow.com/questions/46756802/vue-js-auto-convert-html-and-unicode-entities /-->
     <router-link :to="`/watch?v=${ video_id }`" @click="handleSelectedVideo(title)">
         <div class="w-full grid grid-container grid-cols-7 gap-4">

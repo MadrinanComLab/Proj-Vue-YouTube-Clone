@@ -1,6 +1,5 @@
 <template>
     <div id="home_container">
-        <!-- REMOVED ATTR IN Header:  :tags="tags" :selected_tag="selected_tag" :fetchVideoByTags="fetchVideoByTags" -->
         <Header :display_tags="true"/>
 
         <div class="px-[10%] grid grid-cols-4 gap-4" v-if="$store.state.is_loading && $store.state.error_message === ''">
