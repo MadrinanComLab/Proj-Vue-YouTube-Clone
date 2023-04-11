@@ -2,7 +2,7 @@
 
 ![Banner (2)](https://user-images.githubusercontent.com/74145874/231018519-1a377066-dfb9-498d-a817-6f891d0daab0.jpg)
 
-<b>Link to Video Demo:</b> https://youtu.be/OUh0-8NdVss
+<b>Link to Video Demo:</b> https://youtu.be/OUh0-8NdVss <br/>
 This project was initiated on January 21, 2023, and finished on April 11, 2023.
 
 ## Table of Contents:
